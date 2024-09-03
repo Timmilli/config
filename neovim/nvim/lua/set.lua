@@ -21,8 +21,14 @@ vim.opt.smarttab = true
 vim.opt.smartindent = true
 vim.opt.expandtab = false
 
+-- To share sclipboard between Nvim and Os
+vim.o.clipboard = 'unnamedplus'
+
 -- Save undo history
 vim.opt.undofile = true
+
+-- To :write automatically before any other command is run
+vim.o.autowriteall = true
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
