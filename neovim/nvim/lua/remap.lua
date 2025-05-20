@@ -6,3 +6,5 @@ vim.keymap.set("n", "<C-k>", "{")
 
 vim.keymap.set("v", "<C-j>", "}")
 vim.keymap.set("v", "<C-k>", "{")
+
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
