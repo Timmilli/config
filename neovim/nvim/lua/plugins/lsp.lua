@@ -51,7 +51,7 @@ return {
 		dependencies = {
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "williamboman/mason.nvim" },
-			-- this last dependency is at a version fixed because of a bug created by the removal of 'automatic_enable' function which was called when lauching nvim
+			-- this last dependency is at a version fixed because of a bug created by the removal of automatic_enable function which was called when lauching nvim
 			{ "williamboman/mason-lspconfig.nvim", version = "1.28.0" },
 		},
 		config = function()
