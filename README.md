@@ -1,5 +1,11 @@
 # About
 
-This repo contains the nvim config that I use
+This repo contains things I use in my environment
 
-Nothing fancy, but still nice
+## nvim
+
+My nvim config, nothing fancy, but working
+
+## scripts
+
+Some of the scripts I use
