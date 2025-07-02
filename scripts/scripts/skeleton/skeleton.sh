@@ -166,25 +166,22 @@ function html ()
 </html> ' > $1
 }
 
-function makeTex ()
+function makeJustfile ()
 {
-	echo "FILE_NAME = $2" > $1
-
 echo '
-default: pdf clean
+default: pdf
 
 pdf:
-	pdflatex $(FILE_NAME).tex
-	pdflatex $(FILE_NAME).tex
+	latexmk
+
+continuously:
+	latexmk -pvc
 
 clean:
-	rm -f *.aux *.log *.out *.synctex.gz *.toc *.bbl *.bcf *.blg *.run.xml
-	rm -f **/*.aux **/*.log **/*.out **/*.synctex.gz **/*.toc **/*.bbl **/*.bcf **/*.blg **/*.run.xml
+	latexmk -c
 
-deepClean: clean
-	rm -f *.pdf
-
-all: pdf' >> $1
+deepClean:
+	latexmk -C' > $1
 }
 
 function creation ()
@@ -200,9 +197,9 @@ fi
 
 if [ $3 = "tex" ]
 then
-	creation $1Makefile
-	makeTex $1Makefile $2
-	echo "Makefile skeleton complete"
+	creation $1Justfile
+	makeJustfile $1Justfile
+	echo "Justfile skeleton complete"
 	creation $1$2.$3
 	latex $1$2.$3
 	echo "Tex skeleton complete"

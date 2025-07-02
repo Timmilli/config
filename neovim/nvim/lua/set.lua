@@ -17,14 +17,12 @@ vim.opt.expandtab = false
 -- vim.g.python_recommended_style = 0
 ---
 
-vim.opt.wrap = false
-
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
-vim.opt.hls = false
+vim.opt.hls = true
 vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
@@ -35,10 +33,10 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
-vim.opt.colorcolumn = "80"
-vim.opt.wrap = true
-vim.opt.linebreak = true
-vim.opt.breakindent = true
+-- vim.opt.colorcolumn = "80" -- visual guide
+vim.opt.wrap = true -- soft wrap
+vim.opt.linebreak = true -- wrap at word boundaries
+vim.opt.breakindent = true -- keep indentation on wrapped lines
 
 -- vim.opt.nocompatible = true
 -- vim.opt.syntax = true
