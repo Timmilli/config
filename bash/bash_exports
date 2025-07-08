@@ -1,0 +1,120 @@
+# Initialisation des variables shell export'ees
+_BASH_EXPORT=1
+export _BASH_EXPORT
+
+# par d'efaut
+PATH=$PATH:/bin:/usr/bin:/usr/local/bin
+
+# 
+MANPATH=/usr/man
+
+LM_LICENSE_FILE=$LM_LICENSE_FILE:1700@johnny:1717@johnny:27005@flexlm
+
+# r'epertoires de recherche pour les commandes 
+# pour avoir la commande make standard (pas gnumake)
+PATH=/usr/ccs/bin:$PATH
+
+#pour s'assurer qu'il n'y a pas de :: dans le path ( en bash "::" ~ ":.:" )
+PATH=`echo $PATH|sed -e 's/::/:/g' `
+#idem pour : en fin de path ( ~ ":." )
+PATH=`echo $PATH|sed -e 's/:$//g' `
+
+# r'epertoire de recherche pour le manuel
+MANPATH=$MANPATH:$OPT_MAN:$USR_MAN:$NET_MAN
+
+# tex distribution
+PATH=/usr/local/texlive/2025/bin/x86_64-linux:$PATH
+
+# Type de Terminal
+case $TERM in
+  network |  unknown)
+    TERM=vt100
+    ;;
+esac
+
+SHELL=$BASH
+
+# freesurfer variable
+export FREESURFER_HOME=/usr/local/freesurfer
+source $FREESURFER_HOME/SetUpFreeSurfer.sh > /dev/null
+
+
+#environnement ada
+BLUE="\[\033[01;34m\]"
+CYAN="\[\033[0;36m\]"
+WHITE="\[\033[01;97m\]"
+YELLOW="\[\033[01;33m\]"
+RESET="\[\033[0m\]"
+
+last_two_dirs() {
+  local path="$PWD"
+  local home="$HOME"
+
+	# Case 0: Root → show single /
+  if [[ "$path" == "/" ]]; then
+    echo "/"
+    return
+  fi
+
+  # Case 1: At $HOME → ~/
+  if [[ "$path" == "$home" ]]; then
+    echo "~/"
+    return
+  fi
+
+  # Case 2: At $HOME/something → ~/something/
+  if [[ "$path" == "$home/"* && "$path" != */*/*/* ]]; then
+    echo "~/${path#$home/}/"
+    return
+  fi
+
+  # Case 3: Deeper than $HOME/something → ./sub/dir/
+  if [[ "$path" == "$home/"* ]]; then
+    relative_path="${path#$home/}"
+    IFS='/' read -ra parts <<< "$relative_path"
+    len=${#parts[@]}
+    if (( len >= 2 )); then
+      echo "./${parts[len-2]}/${parts[len-1]}/"
+    else
+      echo "~/${parts[0]}/"
+    fi
+    return
+  fi
+
+  # Case 4: Outside $HOME → full path, last two
+	echo "$path/"
+}
+
+
+parse_git_branch() {
+  if git rev-parse --is-inside-work-tree &>/dev/null; then
+    git rev-parse --abbrev-ref HEAD 2>/dev/null
+  else
+    echo ""
+  fi
+}
+
+update_git_branch() {
+  GIT_BRANCH=$(parse_git_branch)
+}
+
+PROMPT_COMMAND=update_git_branch
+
+export PS1='\[\033[01;33m\]\t\[\033[0m\]\[\033[01;97m\]|\[\033[0m\]\[\033[01;34m\]$(last_two_dirs)\[\033[0m\]${GIT_BRANCH:+\[\033[01;97m\]|\[\033[01;33m\]$GIT_BRANCH}\[\033[01;97m\] >\[\033[0m\] '
+
+PS2='-> '
+umask 077
+
+
+export PS1
+export PS2
+export TERM
+export MANPATH
+export INFOPATH
+export LM_LICENSE_FILE
+export PATH
+export EDITOR=/usr/bin/vim
+export PATH="$PATH:/opt/nvim/"
+
+
+# PS1="\[\033[01;33m\]\t\[\033[0m\]\[\033[01;97m\]|\[\033[0m\]\[\033[01;34m\]\W/\[\033[0m\]\[\033[01;97m\]|\[\033[0m\]\[\033[01;33m\]$branch\[\033[0m\] \[\033[0m\]> "

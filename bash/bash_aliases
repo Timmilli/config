@@ -1,0 +1,38 @@
+# Shortcuts to have the prefered editor
+
+alias vi="nvim"
+alias vim="nvim"
+
+# Shortcuts to have color in commands 
+
+alias grep="grep --color"
+alias ls="ls -h --color"
+
+# Shortcuts to have human readability on numbers
+
+alias du="du -h"
+
+# Shortcuts for ls command
+
+alias l="ls"
+alias ll="ls -l"
+alias la="ls -a"
+alias lla="ls -la"
+
+# Shortcuts to fast clear (even tho Ctrl+l does the job)
+
+alias cl="clear"
+
+# Shortcuts to fast shutdown
+
+alias shutdown="shutdown -P now"
+
+# Shortcuts for security reasons
+
+alias rm="rm -i"
+alias cp="cp -i"
+alias mv="mv -i"
+
+# Shortcuts for faster compiling line (needs the new name right after command)
+
+alias ccc="cc -Wall -std=c99 -o"
