@@ -41,3 +41,4 @@ vim.opt.breakindent = true -- keep indentation on wrapped lines
 -- vim.opt.nocompatible = true
 -- vim.opt.syntax = true
 -- filetype plugin on
+

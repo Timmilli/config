@@ -20,7 +20,6 @@ plugins = {}
 
 opts = {}
 
--- require("lazy").setup(plugins, opts)
 require("lazy").setup("plugins", opts)
 
 require("lualine").setup()
