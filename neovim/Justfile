@@ -1,12 +1,10 @@
-default: copy
-
 copy:
 	cp -r ~/.config/nvim/ ./
 
 restore:
 	cp -rf ./nvim/ ~/.config/ 
 
-all: copy
+all: clean copy
 
 clean:
 	rm -rf ./nvim

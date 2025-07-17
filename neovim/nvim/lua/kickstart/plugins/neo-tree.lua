@@ -1,6 +1,7 @@
+-- Neo-tree is a Neovim plugin to browse the file system
+-- https://github.com/nvim-neo-tree/neo-tree.nvim
 
-
-local config = function ()
+local config = function()
 	require("neo-tree").setup({
 		close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
 		popup_border_style = "rounded",
@@ -9,7 +10,7 @@ local config = function ()
 		enable_normal_mode_for_inputs = false, -- Enable normal mode for input dialogs.
 		open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
 		sort_case_insensitive = false, -- used when sorting files and directories in the tree
-		sort_function = nil , -- use a custom function for sorting files and directories in the tree 
+		sort_function = nil, -- use a custom function for sorting files and directories in the tree
 		-- sort_function = function (a,b)
 		--       if a.type == b.type then
 		--           return a.path > b.path
@@ -19,7 +20,7 @@ local config = function ()
 		--   end , -- this sorts files and directories descendantly
 		default_component_configs = {
 			container = {
-				enable_character_fade = true
+				enable_character_fade = true,
 			},
 			indent = {
 				indent_size = 2,
@@ -42,7 +43,7 @@ local config = function ()
 				-- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
 				-- then these will never be used.
 				default = "*",
-				highlight = "NeoTreeFileIcon"
+				highlight = "NeoTreeFileIcon",
 			},
 			modified = {
 				symbol = "[+]",
@@ -56,17 +57,17 @@ local config = function ()
 			git_status = {
 				symbols = {
 					-- Change type
-					added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-					modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-					deleted   = "✖",-- this can only be used in the git_status source
-					renamed   = "󰁕",-- this can only be used in the git_status source
+					added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+					modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
+					deleted = "✖", -- this can only be used in the git_status source
+					renamed = "󰁕", -- this can only be used in the git_status source
 					-- Status type
 					untracked = "",
-					ignored   = "",
-					unstaged  = "󰄱",
-					staged    = "",
-					conflict  = "",
-				}
+					ignored = "",
+					unstaged = "󰄱",
+					staged = "",
+					conflict = "",
+				},
 			},
 			-- If you don't want to use these columns, you can set `enabled = false` for each of them individually
 			file_size = {
@@ -104,7 +105,7 @@ local config = function ()
 				hide_gitignored = false,
 				hide_hidden = true, -- only works on Windows for hidden files/directories
 				hide_by_name = {
-					"node_modules"
+					"node_modules",
 				},
 				hide_by_pattern = { -- uses glob style patterns
 					--"*.meta",
@@ -128,12 +129,12 @@ local config = function ()
 			},
 			group_empty_dirs = false, -- when true, empty folders will be grouped together
 			hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
-																							-- in whatever position is specified in window.position
-														-- "open_current",  -- netrw disabled, opening a directory opens within the
-																							-- window like netrw would, regardless of window.position
-														-- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
+			-- in whatever position is specified in window.position
+			-- "open_current",  -- netrw disabled, opening a directory opens within the
+			-- window like netrw would, regardless of window.position
+			-- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
 			use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
-																			-- instead of relying on nvim autocmd events.
+			-- instead of relying on nvim autocmd events.
 			window = {
 				mappings = {
 					["<bs>"] = "navigate_up",
@@ -147,7 +148,7 @@ local config = function ()
 					["<c-x>"] = "clear_filter",
 					["[g"] = "prev_git_modified",
 					["]g"] = "next_git_modified",
-					["o"] = { "show_help", nowait=false, config = { title = "Order by", prefix_key = "o" }},
+					["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
 					["oc"] = { "order_by_created", nowait = false },
 					["od"] = { "order_by_diagnostics", nowait = false },
 					["og"] = { "order_by_git_status", nowait = false },
@@ -164,7 +165,7 @@ local config = function ()
 				},
 			},
 
-			commands = {} -- Add a custom command or override a global one using the same function name
+			commands = {}, -- Add a custom command or override a global one using the same function name
 		},
 		buffers = {
 			follow_current_file = {
@@ -179,45 +180,43 @@ local config = function ()
 					["bd"] = "buffer_delete",
 					["<bs>"] = "navigate_up",
 					["."] = "set_root",
-					["o"] = { "show_help", nowait=false, config = { title = "Order by", prefix_key = "o" }},
+					["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
 					["oc"] = { "order_by_created", nowait = false },
 					["od"] = { "order_by_diagnostics", nowait = false },
 					["om"] = { "order_by_modified", nowait = false },
 					["on"] = { "order_by_name", nowait = false },
 					["os"] = { "order_by_size", nowait = false },
 					["ot"] = { "order_by_type", nowait = false },
-				}
+				},
 			},
 		},
 		git_status = {
 			window = {
 				position = "float",
 				mappings = {
-					["A"]  = "git_add_all",
+					["A"] = "git_add_all",
 					["gu"] = "git_unstage_file",
 					["ga"] = "git_add_file",
 					["gr"] = "git_revert_file",
 					["gc"] = "git_commit",
 					["gp"] = "git_push",
 					["gg"] = "git_commit_and_push",
-					["o"] = { "show_help", nowait=false, config = { title = "Order by", prefix_key = "o" }},
+					["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
 					["oc"] = { "order_by_created", nowait = false },
 					["od"] = { "order_by_diagnostics", nowait = false },
 					["om"] = { "order_by_modified", nowait = false },
 					["on"] = { "order_by_name", nowait = false },
 					["os"] = { "order_by_size", nowait = false },
 					["ot"] = { "order_by_type", nowait = false },
-				}
-			}
-		}
+				},
+			},
+		},
 	})
-
 end
 
-
-return{
-  'nvim-neo-tree/neo-tree.nvim',
-  cmd = 'Neotree',
+return {
+	"nvim-neo-tree/neo-tree.nvim",
+	cmd = "Neotree",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
@@ -227,27 +226,26 @@ return{
 	keys = {
 		{ "<leader>po", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
 	},
-  init = function()
-    vim.api.nvim_create_autocmd('BufEnter', {
-      -- make a group to be able to delete it later
-      group = vim.api.nvim_create_augroup('NeoTreeInit', {clear = true}),
-      callback = function()
-        local f = vim.fn.expand('%:p')
-        if vim.fn.isdirectory(f) ~= 0 then
+	init = function()
+		vim.api.nvim_create_autocmd("BufEnter", {
+			-- make a group to be able to delete it later
+			group = vim.api.nvim_create_augroup("NeoTreeInit", { clear = true }),
+			callback = function()
+				local f = vim.fn.expand("%:p")
+				if vim.fn.isdirectory(f) ~= 0 then
 					vim.cmd.cd(f)
 
-          vim.cmd('Neotree current dir=' .. f)
-          -- neo-tree is loaded now, delete the init autocmd
-          vim.api.nvim_clear_autocmds{group = 'NeoTreeInit'}
-        end
-      end
-    })
-    -- keymaps
-  end,
-  opts = {
-    filesystem = {
-      hijack_netrw_behavior = 'open_current'
-    }
-  }
+					vim.cmd("Neotree current dir=" .. f)
+					-- neo-tree is loaded now, delete the init autocmd
+					vim.api.nvim_clear_autocmds({ group = "NeoTreeInit" })
+				end
+			end,
+		})
+		-- keymaps
+	end,
+	opts = {
+		filesystem = {
+			hijack_netrw_behavior = "open_current",
+		},
+	},
 }
-
