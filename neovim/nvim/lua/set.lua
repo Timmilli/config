@@ -87,4 +87,6 @@ vim.opt.hls = true
 vim.opt.incsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
-vim.opt.wrap = true
+vim.opt.wrap = true -- soft wrap
+vim.opt.linebreak = true -- wrap at word boundaries
+vim.opt.breakindent = true -- keep indentation on wrapped lines

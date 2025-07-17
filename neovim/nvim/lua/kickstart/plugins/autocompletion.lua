@@ -56,11 +56,19 @@ return { -- Autocompletion
 			-- <c-k>: Toggle signature help
 			--
 			-- See :h blink-cmp-config-keymap for defining your own keymap
-			preset = "default",
-
+			["<Tab>"] = {
+				function(cmp)
+					if cmp.get_selected_item_idx() == 0 then
+						return cmp.show_and_insert()
+					else
+						return cmp.select_next()
+					end
+				end,
+				"fallback",
+			},
+			["<S-Tab>"] = { "select_prev", "fallback" },
 			-- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
 			--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
-			["<Tab>"] = { "select_next", "fallback" },
 		},
 
 		appearance = {
@@ -72,7 +80,16 @@ return { -- Autocompletion
 		completion = {
 			-- By default, you may press `<c-space>` to show the documentation.
 			-- Optionally, set `auto_show = true` to show the documentation after a delay.
-			documentation = { auto_show = false, auto_show_delay_ms = 500 },
+			list = {
+				selection = {
+					preselect = false,
+					auto_insert = true,
+				},
+			},
+			documentation = {
+				auto_show = false,
+				auto_show_delay_ms = 500,
+			},
 		},
 
 		sources = {
