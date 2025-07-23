@@ -195,6 +195,15 @@ return {
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
 		require("lspconfig").gdscript.setup(capabilities)
 
+		require("lspconfig").ltex.setup({
+			filetypes = { "vimwiki", "markdown", "md", "pandoc", "vimwiki.markdown.pandoc", "tex", "latex" },
+			settings = {
+				ltex = {
+					language = "en",
+				},
+			},
+		})
+
 		-- Enable the following language servers
 		--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 		--

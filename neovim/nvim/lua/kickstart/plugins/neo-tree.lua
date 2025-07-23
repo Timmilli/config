@@ -1,13 +1,41 @@
 -- Neo-tree is a Neovim plugin to browse the file system
 -- https://github.com/nvim-neo-tree/neo-tree.nvim
 
-local config = function()
-	require("neo-tree").setup({
-		close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+return {
+	"nvim-neo-tree/neo-tree.nvim",
+	cmd = "Neotree",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+		"MunifTanjim/nui.nvim",
+		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+	},
+	keys = {
+		{ "<leader>po", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
+	},
+	init = function()
+		vim.api.nvim_create_autocmd("BufEnter", {
+			-- make a group to be able to delete it later
+			group = vim.api.nvim_create_augroup("NeoTreeInit", { clear = true }),
+			callback = function()
+				local f = vim.fn.expand("%:p")
+				if vim.fn.isdirectory(f) ~= 0 then
+					vim.cmd.cd(f)
+
+					vim.cmd("Neotree current dir=" .. f)
+					-- neo-tree is loaded now, delete the init autocmd
+					vim.api.nvim_clear_autocmds({ group = "NeoTreeInit" })
+				end
+			end,
+		})
+		-- keymaps
+	end,
+	opts = {
+		close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
 		popup_border_style = "rounded",
 		enable_git_status = true,
 		enable_diagnostics = true,
-		enable_normal_mode_for_inputs = false, -- Enable normal mode for input dialogs.
+		neo_tree_popup_input_ready = "stopinsert",
 		open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
 		sort_case_insensitive = false, -- used when sorting files and directories in the tree
 		sort_function = nil, -- use a custom function for sorting files and directories in the tree
@@ -96,7 +124,7 @@ local config = function()
 		commands = {},
 		window = {
 			position = "left",
-			width = 40,
+			width = 30,
 		},
 		filesystem = {
 			filtered_items = {
@@ -108,6 +136,8 @@ local config = function()
 					"node_modules",
 				},
 				hide_by_pattern = { -- uses glob style patterns
+					"*.gd.uid",
+					"*.o",
 					--"*.meta",
 					--"*/src/*/tsconfig.json",
 				},
@@ -128,7 +158,7 @@ local config = function()
 				leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
 			},
 			group_empty_dirs = false, -- when true, empty folders will be grouped together
-			hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
+			hijack_netrw_behavior = "open_current", -- netrw disabled, opening a directory opens neo-tree
 			-- in whatever position is specified in window.position
 			-- "open_current",  -- netrw disabled, opening a directory opens within the
 			-- window like netrw would, regardless of window.position
@@ -210,42 +240,6 @@ local config = function()
 					["ot"] = { "order_by_type", nowait = false },
 				},
 			},
-		},
-	})
-end
-
-return {
-	"nvim-neo-tree/neo-tree.nvim",
-	cmd = "Neotree",
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-		"MunifTanjim/nui.nvim",
-		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-	},
-	keys = {
-		{ "<leader>po", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
-	},
-	init = function()
-		vim.api.nvim_create_autocmd("BufEnter", {
-			-- make a group to be able to delete it later
-			group = vim.api.nvim_create_augroup("NeoTreeInit", { clear = true }),
-			callback = function()
-				local f = vim.fn.expand("%:p")
-				if vim.fn.isdirectory(f) ~= 0 then
-					vim.cmd.cd(f)
-
-					vim.cmd("Neotree current dir=" .. f)
-					-- neo-tree is loaded now, delete the init autocmd
-					vim.api.nvim_clear_autocmds({ group = "NeoTreeInit" })
-				end
-			end,
-		})
-		-- keymaps
-	end,
-	opts = {
-		filesystem = {
-			hijack_netrw_behavior = "open_current",
 		},
 	},
 }
