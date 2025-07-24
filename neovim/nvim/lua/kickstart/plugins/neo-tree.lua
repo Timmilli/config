@@ -138,6 +138,13 @@ return {
 				hide_by_pattern = { -- uses glob style patterns
 					"*.gd.uid",
 					"*.o",
+					"*.aux",
+					"*.bbl",
+					"*.bcf",
+					"*.blg",
+					"*.fdb_latexmk",
+					"*.fls",
+					"*.run.xml",
 					--"*.meta",
 					--"*/src/*/tsconfig.json",
 				},
