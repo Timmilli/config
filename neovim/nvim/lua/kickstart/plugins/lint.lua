@@ -6,7 +6,7 @@ return {
 		config = function()
 			local lint = require("lint")
 			lint.linters_by_ft = {
-				markdown = { "ltex" },
+				text = { "ltex" },
 			}
 
 			-- To allow other plugins to add linters to require('lint').linters_by_ft,
@@ -26,7 +26,6 @@ return {
 			--   rst = { "ltex" },
 			--   ruby = { "ruby" },
 			--   terraform = { "tflint" },
-			--   text = { "ltex" }
 			-- }
 			--
 			-- You can disable the default linters by setting their filetypes to nil:
