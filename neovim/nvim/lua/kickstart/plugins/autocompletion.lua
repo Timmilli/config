@@ -56,6 +56,7 @@ return { -- Autocompletion
 			-- <c-k>: Toggle signature help
 			--
 			-- See :h blink-cmp-config-keymap for defining your own keymap
+			preset = "none",
 			["<Tab>"] = {
 				function(cmp)
 					if cmp.get_selected_item_idx() == 0 then
