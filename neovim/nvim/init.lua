@@ -112,11 +112,29 @@ end
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
+local socket_path = "./godothost"
 local gdproject = io.open(vim.fn.getcwd() .. "/project.godot", "r")
+
 if gdproject then
 	io.close(gdproject)
-	vim.fn.serverstart("./godothost")
+
+	-- If the socket already exists, delete it to prevent "Address already in use"
+	if vim.fn.filereadable(socket_path) == 1 or vim.fn.isdirectory(socket_path) == 1 then
+		os.remove(socket_path)
+	end
+
+	vim.fn.serverstart(socket_path)
 end
+
+vim.api.nvim_create_autocmd("VimLeavePre", {
+	pattern = "*",
+	callback = function()
+		local socket_path = "./godothost"
+		if vim.fn.filereadable(socket_path) == 1 or vim.fn.isdirectory(socket_path) == 1 then
+			os.remove(socket_path)
+		end
+	end,
+})
 
 -- [[ Configure and install plugins ]]
 --
@@ -221,8 +239,6 @@ require("lazy").setup({
 	},
 
 	require("kickstart.plugins.treesiter"),
-
-	require("kickstart.plugins.vimtex"),
 
 	-- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
 	-- init.lua. If you want these files, they are in the repository, so you can just download them and
