@@ -14,8 +14,6 @@ LM_LICENSE_FILE=$LM_LICENSE_FILE:1700@johnny:1717@johnny:27005@flexlm
 # pour avoir la commande make standard (pas gnumake)
 PATH=/usr/ccs/bin:$PATH
 
-PATH=
-
 #pour s'assurer qu'il n'y a pas de :: dans le path ( en bash "::" ~ ":.:" )
 PATH=`echo $PATH|sed -e 's/::/:/g' `
 #idem pour : en fin de path ( ~ ":." )
