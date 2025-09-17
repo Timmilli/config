@@ -14,7 +14,7 @@ LM_LICENSE_FILE=$LM_LICENSE_FILE:1700@johnny:1717@johnny:27005@flexlm
 # pour avoir la commande make standard (pas gnumake)
 PATH=/usr/ccs/bin:$PATH
 
-PATH=$HOME/.npm-global/bin:$PATH
+PATH=
 
 #pour s'assurer qu'il n'y a pas de :: dans le path ( en bash "::" ~ ":.:" )
 PATH=`echo $PATH|sed -e 's/::/:/g' `
@@ -36,13 +36,7 @@ esac
 
 SHELL=$BASH
 
-# freesurfer variable
-export FREESURFER_HOME=/usr/local/freesurfer
-source $FREESURFER_HOME/SetUpFreeSurfer.sh > /dev/null
-
-
-#environnement ada
-BLUE="\[\033[01;34m\]"
+#environnement ada BLUE="\[\033[01;34m\]"
 CYAN="\[\033[0;36m\]"
 WHITE="\[\033[01;97m\]"
 YELLOW="\[\033[01;33m\]"
