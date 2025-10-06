@@ -4,6 +4,7 @@ return { -- Highlight, edit, and navigate code
 	main = "nvim-treesitter.configs", -- Sets main module to use for opts
 	-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 	opts = {
+		ignore_install = { "tex", "latex" },
 		ensure_installed = {
 			"bash",
 			"c",
@@ -27,9 +28,10 @@ return { -- Highlight, edit, and navigate code
 			-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
 			--  If you are experiencing weird indenting issues, add the language to
 			--  the list of additional_vim_regex_highlighting and disabled languages for indent.
-			additional_vim_regex_highlighting = { "ruby", "tex", "latex" },
+			additional_vim_regex_highlighting = { "ruby" },
+			disable = { "tex", "latex" },
 		},
-		indent = { enable = true, disable = { "ruby", "tex", "latex" } },
+		indent = { enable = true, disable = { "ruby" } },
 	},
 	-- There are additional nvim-treesitter modules that you can use to interact
 	-- with nvim-treesitter. You should go explore a few and see what interests you:

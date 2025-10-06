@@ -197,7 +197,7 @@ return {
 			settings = {
 				ltex = {
 					enable = true,
-					language = "en",
+					language = "fr",
 				},
 			},
 		})
