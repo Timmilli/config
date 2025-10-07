@@ -5,3 +5,8 @@ copy:
 
 clean:
 	rm -f bash*
+
+restore:
+	cp bashrc ~/.bashrc
+	cp bash_aliases ~/.bash_aliases
+	cp bash_exports ~/.bash_exports
