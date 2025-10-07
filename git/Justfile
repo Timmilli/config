@@ -1,0 +1,10 @@
+copy:
+	cp -r ~/.gitconfig gitconfig
+
+restore:
+	cp -r gitconfig ~/.gitconfig
+
+all: clean copy
+
+clean:
+	rm -rf gitconfig
