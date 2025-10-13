@@ -1,5 +1,5 @@
 copy:
-	cp -r ~/.gitconfig gitconfig
+	tail -n $(($(cat ~/.gitconfig | wc -l)-4)) ~/.gitconfig > gitconfig
 
 restore:
 	cp -r gitconfig ~/.gitconfig
