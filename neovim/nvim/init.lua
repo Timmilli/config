@@ -208,22 +208,9 @@ require("lazy").setup({
 
 	require("kickstart.plugins.telescope"),
 
-	-- LSP Plugins
-	{
-		-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
-		-- used for completion, annotations and signatures of Neovim apis
-		"folke/lazydev.nvim",
-		ft = "lua",
-		opts = {
-			library = {
-				-- Load luvit types when the `vim.uv` word is found
-				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-			},
-		},
-	},
+	require("kickstart.plugins.lazy"),
 
 	require("kickstart.plugins.lsp"),
-	-- require("kickstart.plugins.vimlsp"),
 
 	require("kickstart.plugins.autoformat"),
 
@@ -233,13 +220,7 @@ require("lazy").setup({
 
 	require("kickstart.plugins.vimtex"),
 
-	-- Highlight todo, notes, etc in comments
-	{
-		"folke/todo-comments.nvim",
-		event = "VimEnter",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = { signs = false },
-	},
+	require("kickstart.plugins.comments"),
 
 	require("kickstart.plugins.treesiter"),
 
