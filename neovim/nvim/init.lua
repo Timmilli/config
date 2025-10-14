@@ -223,6 +223,7 @@ require("lazy").setup({
 	},
 
 	require("kickstart.plugins.lsp"),
+	-- require("kickstart.plugins.vimlsp"),
 
 	require("kickstart.plugins.autoformat"),
 
