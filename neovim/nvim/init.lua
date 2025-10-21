@@ -212,7 +212,7 @@ require("lazy").setup({
 
 	require("kickstart.plugins.lsp"),
 
-	require("kickstart.plugins.autoformat"),
+	require("kickstart.plugins.conform"),
 
 	require("kickstart.plugins.autocompletion"),
 
