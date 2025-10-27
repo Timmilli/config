@@ -206,6 +206,8 @@ require("lazy").setup({
 	--
 	-- Use the `dependencies` key to specify the dependencies of a particular plugin
 
+	require("kickstart.plugins.catppuccin"),
+
 	require("kickstart.plugins.telescope"),
 
 	require("kickstart.plugins.lazy"),
@@ -215,8 +217,6 @@ require("lazy").setup({
 	require("kickstart.plugins.conform"),
 
 	require("kickstart.plugins.autocompletion"),
-
-	require("kickstart.plugins.catppuccin"),
 
 	require("kickstart.plugins.vimtex"),
 
