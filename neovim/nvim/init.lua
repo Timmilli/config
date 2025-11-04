@@ -7,7 +7,7 @@
 ========         .----------------------.   | === |          ========
 ========         |.-""""""""""""""""""-.|   |-----|          ========
 ========         ||                    ||   | === |          ========
-========         ||   KICKSTART.NVIM   ||   |-----|          ========
+========         ||   NVIM   ||   |-----|          ========
 ========         ||                    ||   | === |          ========
 ========         ||                    ||   |-----|          ========
 ========         ||:Tutor              ||   |:::::|          ========
@@ -22,9 +22,9 @@
 
 What is Kickstart?
 
-  Kickstart.nvim is *not* a distribution.
+  nvim is *not* a distribution.
 
-  Kickstart.nvim is a starting point for your own configuration.
+  nvim is a starting point for your own configuration.
     The goal is that you can read every line of code, top-to-bottom, understand
     what your configuration is doing, and modify it to suit your needs.
 
@@ -68,7 +68,7 @@ Kickstart Guide:
 
   I have left several `:help X` comments throughout the init.lua
     These are hints about where to find more information about the relevant settings,
-    plugins or Neovim features used in Kickstart.
+    plugins or Neovim features used in 
 
    NOTE: Look for lines like this
 
@@ -112,29 +112,27 @@ end
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
-local socket_path = "./godothost"
-local gdproject = io.open(vim.fn.getcwd() .. "/project.godot", "r")
+-- paths to check for project.godot file
+local paths_to_check = { "/", "/../" }
+local is_godot_project = false
+local godot_project_path = ""
+local cwd = vim.fn.getcwd()
 
-if gdproject then
-	io.close(gdproject)
-
-	-- If the socket already exists, delete it to prevent "Address already in use"
-	if vim.fn.filereadable(socket_path) == 1 or vim.fn.isdirectory(socket_path) == 1 then
-		os.remove(socket_path)
+-- iterate over paths and check
+for key, value in pairs(paths_to_check) do
+	if vim.uv.fs_stat(cwd .. value .. "project.godot") then
+		is_godot_project = true
+		godot_project_path = cwd .. value
+		break
 	end
-
-	vim.fn.serverstart(socket_path)
 end
 
-vim.api.nvim_create_autocmd("VimLeavePre", {
-	pattern = "*",
-	callback = function()
-		local socket_path = "./godothost"
-		if vim.fn.filereadable(socket_path) == 1 or vim.fn.isdirectory(socket_path) == 1 then
-			os.remove(socket_path)
-		end
-	end,
-})
+-- check if server is already running in godot project path
+local is_server_running = vim.uv.fs_stat(godot_project_path .. "/server.pipe")
+-- start server, if not already running
+if is_godot_project and not is_server_running then
+	vim.fn.serverstart(godot_project_path .. "/server.pipe")
+end
 
 -- [[ Configure and install plugins ]]
 --
@@ -206,23 +204,29 @@ require("lazy").setup({
 	--
 	-- Use the `dependencies` key to specify the dependencies of a particular plugin
 
-	require("kickstart.plugins.catppuccin"),
+	require("plugins.catppuccin"),
 
-	require("kickstart.plugins.telescope"),
+	require("plugins.telescope"),
 
-	require("kickstart.plugins.lazy"),
+	require("plugins.lazy"),
 
-	require("kickstart.plugins.lsp"),
+	require("plugins.lsp"),
 
-	require("kickstart.plugins.conform"),
+	require("plugins.conform"),
 
-	require("kickstart.plugins.autocompletion"),
+	require("plugins.autocompletion"),
 
-	require("kickstart.plugins.vimtex"),
+	require("plugins.vimtex"),
 
-	require("kickstart.plugins.comments"),
+	require("plugins.comments"),
 
-	require("kickstart.plugins.treesiter"),
+	require("plugins.treesiter"),
+
+	require("plugins.markdown_preview"),
+
+	require("plugins.luasnip"),
+
+	require("plugins.texpresso"),
 
 	-- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
 	-- init.lua. If you want these files, they are in the repository, so you can just download them and
@@ -233,14 +237,15 @@ require("lazy").setup({
 	--  Here are some example plugins that I've included in the Kickstart repository.
 	--  Uncomment any of the lines below to enable them (you will need to restart nvim).
 	--
-	-- require 'kickstart.plugins.debug',
-	require("kickstart.plugins.indent_line"),
-	require("kickstart.plugins.lint"),
-	require("kickstart.plugins.autopairs"),
-	require("kickstart.plugins.neo-tree"),
-	require("kickstart.plugins.terminal"),
-	require("kickstart.plugins.precommit"),
-	-- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+	-- require 'plugins.debug',
+	require("plugins.indent_line"),
+	require("plugins.lint"),
+	require("plugins.autopairs"),
+	require("plugins.neo-tree"),
+	require("plugins.terminal"),
+	require("plugins.precommit"),
+	require("plugins.whichkey"),
+	-- require 'plugins.gitsigns', -- adds gitsigns recommend keymaps
 
 	-- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
 	--    This is the easiest way to modularize your config.
