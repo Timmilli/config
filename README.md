@@ -1,11 +1,20 @@
 # About
 
-This repo contains things I use in my environment
+This is my config.
 
-## nvim
+For each directory, a `Justfile` file with the following rules is present:
 
-My nvim config, nothing fancy, but working
+Copies the computer directory to this place
+```bash
+just copy 
+```
 
-## scripts
+Copies this directory to the computer directory (overwrites)
+```bash
+just restore
+```
 
-Some of the scripts I use
+Clean this directory
+```bash
+just clean
+```
