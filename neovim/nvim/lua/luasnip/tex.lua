@@ -6,7 +6,7 @@ end
 return {
 	-- New document generation snippet
 	s(
-		{ trig = "startup", snippetType = "snippet", desc = "First generation of a doc", wordTrig = false },
+		{ trig = "documentclass", snippetType = "snippet", desc = "First generation of a doc", wordTrig = false },
 		fmta(
 			[[
 				\documentclass[a4paper,french]{<>}
@@ -183,7 +183,7 @@ return {
 	),
 
 	s(
-		{ trig = "/begin", snippetType = "autosnippet", dscr = "Begin and end an arbitrary environment" },
+		{ trig = "\\begin", snippetType = "autosnippet", dscr = "Begin and end an arbitrary environment" },
 		fmta(
 			[[
         \begin{<>}
