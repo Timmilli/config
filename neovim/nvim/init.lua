@@ -237,12 +237,10 @@ require("lazy").setup({
 	--  Here are some example plugins that I've included in the Kickstart repository.
 	--  Uncomment any of the lines below to enable them (you will need to restart nvim).
 	--
-	-- require 'plugins.debug',
 	require("plugins.indent_line"),
 	require("plugins.lint"),
 	require("plugins.autopairs"),
 	require("plugins.neo-tree"),
-	require("plugins.terminal"),
 	require("plugins.precommit"),
 	require("plugins.whichkey"),
 	-- require 'plugins.gitsigns', -- adds gitsigns recommend keymaps
