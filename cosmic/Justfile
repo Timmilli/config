@@ -1,0 +1,15 @@
+default:
+	@echo "There is no default command."
+
+copy:
+	rm -rf ./cosmic/
+	cp -r ~/.config/cosmic/ ./
+
+restore:
+	rm -rf ~/.config/cosmic/
+	cp -rf ./cosmic/ ~/.config/ 
+
+all: clean copy
+
+clean:
+	rm -rf ./cosmic/

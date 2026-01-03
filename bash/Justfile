@@ -1,3 +1,6 @@
+default:
+	@echo "There is no default command."
+
 copy:
 	cp ~/.bashrc ./bashrc
 	cp ~/.bash_aliases ./bash_aliases
