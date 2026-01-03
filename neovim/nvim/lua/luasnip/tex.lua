@@ -145,6 +145,9 @@ return {
 
 				\newpage
 
+				\pagenumbering{arabic}
+				\setcounter{page}{1}
+
 				\pagenumbering{roman}
 				\setcounter{page}{1}
 
@@ -158,9 +161,6 @@ return {
 			{ i(1, "Document title"), i(2, "Authors"), i(3, "Departement") }
 		)
 	),
-
-	-- Greek letter snippets
-	s({ trig = ";a", snippetType = "autosnippet", desc = "alpha", wordTrig = false }, { t("\\alpha") }),
 
 	-- Boilerplate snippets
 	s(
@@ -187,7 +187,7 @@ return {
 		fmta(
 			[[
         \begin{<>}
-            <>
+          <>
         \end{<>}
         ]],
 			{ i(1), i(2), rep(1) }
