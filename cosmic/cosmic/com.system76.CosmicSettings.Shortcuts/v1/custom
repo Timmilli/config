@@ -1,0 +1,53 @@
+{
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "Tab",
+    ): Disable,
+    (
+        modifiers: [
+            Ctrl,
+            Alt,
+        ],
+        key: "t",
+    ): System(Terminal),
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "l",
+    ): System(LockScreen),
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "Up",
+    ): Maximize,
+    (
+        modifiers: [
+            Super,
+            Shift,
+        ],
+        key: "Down",
+    ): MoveToNextWorkspace,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "Down",
+    ): Minimize,
+    (
+        modifiers: [
+            Super,
+            Shift,
+        ],
+        key: "Up",
+    ): MoveToPreviousWorkspace,
+    (
+        modifiers: [
+            Alt,
+        ],
+        key: "Escape",
+    ): System(WindowSwitcher),
+}
