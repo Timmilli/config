@@ -36,3 +36,7 @@ alias mv="mv -i"
 # Shortcuts for faster compiling line (needs the new name right after command)
 
 alias ccc="cc -Wall -std=c99 -o"
+
+# Shortcuts to change terminal opacity
+# (works on PopOs24.04 which uses COSMIC)
+alias change_opacity="~/.scripts/change_opacity.sh"

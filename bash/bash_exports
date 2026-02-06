@@ -3,10 +3,14 @@ _BASH_EXPORT=1
 export _BASH_EXPORT
 
 # par d'efaut
-PATH=$PATH:/bin:/usr/bin:/usr/local/bin
-
+PATH=$PATH:/home/guenael/.local/bin:/bin:/usr/bin:/usr/local/bin
 # 
 MANPATH=/usr/man
+
+PATH=/usr/share/texpresso/build/:$PATH
+
+JAVA_HOME=/lib/jvm/java-17-openjdk-amd64/
+PATH=$JAVA_HOME/bin:$PATH
 
 LM_LICENSE_FILE=$LM_LICENSE_FILE:1700@johnny:1717@johnny:27005@flexlm
 
@@ -105,9 +109,10 @@ export PS2
 export TERM
 export MANPATH
 export INFOPATH
+export JAVA_HOME
 export LM_LICENSE_FILE
 export PATH
-export EDITOR=/usr/bin/vim
+export EDITOR=/opt/nvim-linux-x86_64/bin/nvim
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
 
