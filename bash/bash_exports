@@ -8,6 +8,7 @@ PATH=$PATH:/home/guenael/.local/bin:/bin:/usr/bin:/usr/local/bin
 MANPATH=/usr/man
 
 PATH=/usr/share/texpresso/build/:$PATH
+PATH=/home/guenael/.nvm/versions/node/v25.6.0/bin/npm:/home/guenael/.nvm/versions/node/v25.6.0/bin/node:$PATH
 
 JAVA_HOME=/lib/jvm/java-17-openjdk-amd64/
 PATH=$JAVA_HOME/bin:$PATH
