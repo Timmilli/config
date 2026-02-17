@@ -127,3 +127,25 @@ export NVM_DIR="$HOME/.nvm"
 export IGRAPH_PATH_HEADERS=/usr/local/include/igraph
 export IGRAPH_PATH_LIB=/usr/local/lib
 export LD_LIBRARY_PATH=/usr/local/lib
+
+
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/guenael/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/guenael/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/guenael/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/guenael/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# Zoxide 
+# https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#user-content-fn-1-c760a5676f96f6fe27212d0cba7478f8
+eval "$(zoxide init bash --cmd cd)"
