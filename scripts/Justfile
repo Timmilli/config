@@ -1,11 +1,12 @@
 default:
 	@echo "There is no default command."
 
-default: copy
-
-copy:
+copy_from_pc:
 	mkdir -p scripts
 	cp -r ~/.scripts/public/* scripts/
+
+copy_from_here:
+	cp -r scripts/* ~/.scripts*
 
 clean:
 	rm -rf scripts/
