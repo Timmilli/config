@@ -1,13 +1,2 @@
 default:
-	@echo "There is no default command."
-
-copy:
-	tail -n $(($(cat ~/.gitconfig | wc -l)-4)) ~/.gitconfig > gitconfig
-
-restore:
-	cp -r gitconfig ~/.gitconfig
-
-all: clean copy
-
-clean:
-	rm -rf gitconfig
+	@echo "This a script to be executed, nothing to do with Justfile"
